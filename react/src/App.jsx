@@ -47,12 +47,14 @@ export default function App() {
         <div className="layout">
           <DepartmentManager
           deptList={deptList}
-          onRefresh={findAllDepartment}
+          onDeptRefresh={findAllDepartment}
+          onEmpRefresh={findAllEmployee}
           />
           <EmployeeManager 
           deptList={deptList}
           empList={empList}
-          onRefresh={findAllEmployee}
+          onDeptRefresh={findAllDepartment}
+          onEmpRefresh={findAllEmployee}
           />
         </div>
       </div>

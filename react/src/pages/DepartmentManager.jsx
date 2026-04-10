@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { addDept, updDept, delDept } from '../api/departmentAPI';
 
-export default function DepartmentManager({deptList, onRefresh}) {
+export default function DepartmentManager({deptList, onDeptRefresh, onEmpRefresh}) {
 
   // 부서 등록
   const addDeptartment = async (e) => {
@@ -11,7 +11,8 @@ export default function DepartmentManager({deptList, onRefresh}) {
       const dept_name = e.target.dept_name.value;
       await addDept(dept_name);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
 
       alert('부서 등록 성공');
     } catch (error) {
@@ -32,7 +33,8 @@ export default function DepartmentManager({deptList, onRefresh}) {
       }
       await updDept(obj);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
 
       alert('부서 수정 성공');
     } catch (error) {
@@ -45,7 +47,8 @@ export default function DepartmentManager({deptList, onRefresh}) {
     try {
       await delDept(dept_id);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
 
       alert('부서 삭제 성공');
     } catch (error) {

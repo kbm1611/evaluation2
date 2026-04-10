@@ -1,7 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 import { findAllEmp, addEmp, delEmp, updEmp } from '../api/employeeAPI';
 
-export default function EmployeeManager({deptList, empList, onRefresh}) {
+export default function EmployeeManager({deptList, empList, onDeptRefresh, onEmpRefresh}) {
 
   // 사원 등록
   const addEmployee = async (e) => {
@@ -21,7 +21,10 @@ export default function EmployeeManager({deptList, empList, onRefresh}) {
       if (uploadFile) { formData.append('uploadFile', uploadFile); }
       await addEmp(formData);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
+
+      console.log(empList);
 
       alert('사원 등록 성공');
     } catch (error) {
@@ -42,7 +45,8 @@ export default function EmployeeManager({deptList, empList, onRefresh}) {
       }
       await updEmp(obj);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
 
       alert('사원 수정 성공');
     } catch (error) {
@@ -55,7 +59,8 @@ export default function EmployeeManager({deptList, empList, onRefresh}) {
     try {
       const data = await delEmp(emp_id);
 
-      if(onRefresh) onRefresh();
+      if(onDeptRefresh) onDeptRefresh();
+      if(onEmpRefresh) onEmpRefresh();
 
       alert('사원 삭제 성공');
     } catch (error) {
@@ -110,7 +115,7 @@ export default function EmployeeManager({deptList, empList, onRefresh}) {
           <tbody>
             {empList.map((emp) => (
               <tr key={emp.emp_id}>
-                <td><img src={`${emp.profileImage}`} /></td>
+                <td><img className="profile-img" src={`${emp.profileImage}`} /></td>
                 <td>{emp.emp_name}</td>
                 <td>{emp.dept_name}</td>
                 <td>{emp.position}</td>
